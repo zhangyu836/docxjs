@@ -1,0 +1,51 @@
+{
+  "name": "@zhangyu836/docxjs",
+  "version": "0.1.1",
+  "description": "Javascript port of python-docx.",
+  "main": "dist/api.js",
+  "author": "Zhang Yu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhangyu836/docxjs.git"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "grunt build",
+    "install-build": "npm install && grunt build"
+  },
+  "keywords": [
+    "docx",
+    "docxjs"
+  ],
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.2",
+    "zip-local": "^0.3.5",
+    "shasum-object": "^1.0.0",
+    "xpath": "^0.0.32"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/plugin-proposal-decorators": "^7.18.2",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.11.2",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.2",
+    "grunt": "^1.3.0",
+    "grunt-babel": "^8.0.0",
+    "grunt-browserify": "^5.3.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "sinon": "^14.0.0",
+    "lodash": "^4.17.21",
+    "proxyquire": "^2.1.3",
+    "ohm-js": "^16.3.4"
+  }
+}

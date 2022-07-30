@@ -1,0 +1,25 @@
+{
+  "name": "docxjs-demo",
+  "version": "0.1.0",
+  "description": "Javascript port of python-docx.",
+  "main": "dist/api.js",
+  "author": "Zhang Yu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhangyu836/docxjs.git"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "docx",
+    "docxjs"
+  ],
+  "dependencies": {
+    "@zhangyu836/docxjs": "^0.1.1",
+    "@types/node": "^14.11.2"
+  }
+}
