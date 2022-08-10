@@ -3,8 +3,7 @@ Provides the PackURI value type along with some useful known pack URI strings
 such as PACKAGE_URI.
 */
 let path = require('path');
-let posixpath = path.posix;
-
+let posixpath = path.posix ? path.posix : path;
 let {ValueError} = require('./exceptions');
 
 class PackURI extends String {
@@ -20,7 +19,11 @@ class PackURI extends String {
             throw new ValueError(msg);
         }
         this.pack_uri_str = pack_uri_str;
-        this._parsed_path = posixpath.parse(pack_uri_str);
+        //this._parsed_path = posixpath.parse(pack_uri_str);
+        this._dir = posixpath.dirname(pack_uri_str);
+        this._ext = posixpath.extname(pack_uri_str);
+        this._base = posixpath.basename(pack_uri_str);
+        this._name = this._ext.length>0 ? this._base.slice(0,-this._ext.length) : this._base;
     }
     static from_rel_ref(baseURI, relative_ref){
         /*
@@ -38,14 +41,16 @@ class PackURI extends String {
         speaking. E.g. ``'/ppt/slides'`` for ``'/ppt/slides/slide1.xml'``.
         For the package pseudo-partname '/', baseURI is '/'.
         */
-        return this._parsed_path.dir;
+        //return this._parsed_path.dir;
+        return this._dir;
     }
     get ext() {
         /*
         The extension portion of this pack URI, e.g. ``'xml'`` for
         ``'/word/document.xml'``. Note the period is not included.
         */
-        return this._parsed_path.ext.slice(1);
+        //return this._parsed_path.ext.slice(1);
+        return this._ext.slice(1);
     }
     get filename() {
         /*
@@ -53,7 +58,8 @@ class PackURI extends String {
         ``'/ppt/slides/slide1.xml'``. For the package pseudo-partname '/',
         filename is ''.
         */
-        return this._parsed_path.base;
+        //return this._parsed_path.base;
+        return this._base;
     }
     get idx() {
         /*
@@ -67,7 +73,7 @@ class PackURI extends String {
         if (! filename) {
             return null;
         }
-        name_part = this._parsed_path.name;
+        name_part = this._name;//this._parsed_path.name;
         match = name_part.match(_filename_re);
         if (match === null) {
             return null;

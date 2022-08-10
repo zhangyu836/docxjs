@@ -10,7 +10,8 @@
     "url": "https://github.com/zhangyu836/docxjs.git"
   },
   "files": [
-    "dist",
+    "demo.js",
+    "monty-truth.png",
     "LICENSE",
     "README.md"
   ],

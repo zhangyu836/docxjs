@@ -2,7 +2,8 @@
 |SettingsPart| and closely related objects
 */
 let path = require('path');
-let fs = require('fs');
+//let fs = require('fs');
+let {settings} = require('../templates/defaults');
 let {CT} = require('../opc/constants');
 let {PackURI} = require('../opc/packuri');
 let {XmlPart} = require('../opc/part');
@@ -34,9 +35,10 @@ class SettingsPart extends XmlPart {
         /*
         Return a bytestream containing XML for a default settings part.
         */
-        let _path = path.join(__dirname, "..", "templates", "default-settings.xml");
-        let xml_bytes = fs.readFileSync(_path, 'utf-8');
-        return xml_bytes;
+        //let _path = path.join(__dirname, "..", "templates", "default-settings.xml");
+        //let xml_bytes = fs.readFileSync(_path, 'utf-8');
+        //return xml_bytes;
+        return settings;
     }
 }
 

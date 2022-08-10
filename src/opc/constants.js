@@ -89,6 +89,7 @@ let CONTENT_TYPE = {
     WML_SETTINGS :'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml',
     WML_STYLES :'application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml',
     WML_WEB_SETTINGS :'application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml',
+    WML_TEMPLATE_MAIN :'application/vnd.openxmlformats-officedocument.wordprocessingml.template.main+xml',
     XML :'application/xml',
     X_EMF :'image/x-emf',
     X_FONTDATA :'application/x-fontdata',

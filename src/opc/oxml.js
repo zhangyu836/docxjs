@@ -4,7 +4,7 @@ PackageReader transplant. Probably much will get replaced with objects from
 the pptx.oxml.core and then this module will either get deleted or only hold
 the package related custom element classes.
 */
-let {NS, RTM} = require('./constants');
+let {NS, RTM, CT} = require('./constants');
 let {register_element_cls} = require('../oxml/xmlelemlookup')
 let {parse_xml, serializeToString} = require('../oxml/xmlhandler');
 let {BaseOxmlElement} = require('../oxml/xmlchemy')
@@ -214,6 +214,7 @@ class CT_Types extends BaseOxmlElement {
         values.
         */
         let override;
+        if (content_type===CT.WML_TEMPLATE_MAIN) content_type = CT.WML_DOCUMENT_MAIN;
         override = CT_Override._new(partname, content_type);
         this.append(override);
     }

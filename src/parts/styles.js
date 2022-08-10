@@ -3,7 +3,8 @@ Provides StylesPart and related objects
 */
 
 let path = require('path');
-let fs = require('fs');
+//let fs = require('fs');
+let {styles} = require('../templates/defaults');
 let {CT} = require('../opc/constants');
 let {PackURI} = require('../opc/packuri');
 let {XmlPart} = require('../opc/part');
@@ -36,9 +37,10 @@ class StylesPart extends XmlPart {
         /*
         Return a bytestream containing XML for a default styles part.
         */
-        let _path = path.join(__dirname, "..", "templates", "default-styles.xml");
-        let xml_bytes = fs.readFileSync(_path, 'utf-8');
-        return xml_bytes;
+        //let _path = path.join(__dirname, "..", "templates", "default-styles.xml");
+        //let xml_bytes = fs.readFileSync(_path, 'utf-8');
+        //return xml_bytes;
+        return styles;
     }
 }
 

@@ -22,7 +22,7 @@ class CorePropertiesPart extends XmlPart {
         core_properties_part = this._new(_package);
         core_properties = core_properties_part.core_properties;
         core_properties.title = "Word Document";
-        core_properties.last_modified_by = "src";
+        core_properties.last_modified_by = "docxjs";
         core_properties.revision = 1;
         core_properties.modified = new Date();
         return core_properties_part;

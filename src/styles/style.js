@@ -2,7 +2,7 @@
 /*
 Style object hierarchy.
 */
-let BabelFish = require('./BabelFish');
+let BabelFish = require('./babelfish');
 let {WD_STYLE_TYPE} = require('../enum/style');
 let {ElementProxy} = require('../shared');
 let {Font} = require('../text/font');

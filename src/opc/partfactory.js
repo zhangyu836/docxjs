@@ -20,6 +20,7 @@ function part_class_selector(content_type, reltype) {
 let part_type_for = {};
 part_type_for[CT.OPC_CORE_PROPERTIES] = CorePropertiesPart;
 part_type_for[CT.WML_DOCUMENT_MAIN] = DocumentPart;
+part_type_for[CT.WML_TEMPLATE_MAIN] = DocumentPart;
 part_type_for[CT.WML_FOOTER] = FooterPart;
 part_type_for[CT.WML_HEADER] = HeaderPart;
 part_type_for[CT.WML_NUMBERING] = NumberingPart;

@@ -2,89 +2,11 @@
 /*
 Base classes and other objects used by enumerations
 */
-//let textwrap = require('textwrap');
+
 let {InvalidXmlError, ValueError} = require('../exceptions');
 let {getType} = require('../oxml/simpletypes')
 
-/*
-Base classes and other objects used by enumerations
-function alias(...aliases) {
 
-    Decorating a class with @alias('FOO', 'BAR', ..) allows the class to
-    be referenced by each of the names provided as arguments.
-
-}*/
-class _DocsPageFormatter  {
-    /*Generate an .rst doc page for an enumeration.
-
-    Formats a RestructuredText documentation page (string) for the enumeration
-    class parts passed to the constructor. An immutable one-shot service
-    object.
-    */
-    constructor(clsname, clsdict) {
-        this._clsname = clsname;
-        this._clsdict = clsdict;
-    }
-    get page_str() {
-        /*
-        The RestructuredText documentation page for the enumeration. This is
-        the only API member for the class.
-        */
-
-        return `.. _${this._ms_name}:\n\n${this._page_title}\n\n${this._intro_text}\n\n----\n\n${this._member_defs}`;
-    }
-    get _intro_text() {
-        /* Docstring of the enumeration, formatted for documentation page. */
-        let cls_docstring;
-
-        return textwrap.dedent(cls_docstring).strip();
-    }
-    _member_def(member) {
-        /*
-        Return an individual member definition formatted as an RST glossary
-        entry, wrapped to fit within 78 columns.
-        */
-        let member_docstring;
-        member_docstring = textwrap.dedent(member.docstring).strip();
-        member_docstring = textwrap.fill(member_docstring,
-            {"width": 78, "initial_indent": (" " * 4), "subsequent_indent": (" " * 4)});
-        return `${member.name}\n${member_docstring}\n`;
-    }
-    get _member_defs() {
-        /*
-        A single string containing the aggregated member definitions section
-        of the documentation page
-        */
-        let members = this["__members__"];
-        let _this = this;
-        function member_defs () {
-            let a = [];
-            for (let index = 0; index < members.length; index += 1) {
-                let member = members[index];
-                if ((member.name !== null)) {
-                    a.push(_this._member_def(member));
-                }
-            }
-            return a;
-        }
-        return "\n".join(member_defs);
-    }
-    get _ms_name() {
-        /*
-        The Microsoft API name for this enumeration
-        */
-        return this._clsdict["__ms_name__"];
-    }
-    get _page_title() {
-        /*
-        The title for the documentation page, formatted as code (surrounded
-        in double-backticks) and underlined with '=' characters
-        */
-        let title_underscore;
-        title_underscore = "=" * (this._clsname.length + 4);
-        return ```${this._clsname}``\n${title_underscore}`;
-    }
-}
 class Enumeration {
     /*
     The metaclass for Enumeration and its subclasses. Adds a name for each
@@ -124,7 +46,7 @@ class Enumeration {
         /*
         Return the RST documentation page for the enumeration.
         */
-        clsdict["__docs_rst__"] = _DocsPageFormatter(clsname, clsdict).page_str;
+        //clsdict["__docs_rst__"] = _DocsPageFormatter(clsname, clsdict).page_str;
     }
 //}
 //class EnumerationBase  {

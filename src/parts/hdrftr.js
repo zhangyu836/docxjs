@@ -1,6 +1,7 @@
 /* Header and footer part objects */
 let path = require('path');
-let fs = require('fs');
+//let fs = require('fs');
+let {header, footer} = require('../templates/defaults');
 let {CT} = require('../opc/constants');
 let {parse_xml} = require('../oxml/xmlhandler');
 let {BaseStoryPart} = require('./story');
@@ -18,9 +19,10 @@ class FooterPart extends BaseStoryPart {
     }
     static _default_footer_xml() {
         /* Return bytes containing XML for a default footer part. */
-        let _path = path.join(__dirname, "..", "templates", "default-footer.xml");
-        let xml_bytes = fs.readFileSync(_path, 'utf-8');
-        return xml_bytes;
+        //let _path = path.join(__dirname, "..", "templates", "default-footer.xml");
+        //let xml_bytes = fs.readFileSync(_path, 'utf-8');
+        //return xml_bytes;
+        return footer;
     }
 }
 class HeaderPart extends BaseStoryPart {
@@ -37,9 +39,10 @@ class HeaderPart extends BaseStoryPart {
     }
     static _default_header_xml() {
         /* Return bytes containing XML for a default header part. */
-        let _path = path.join(__dirname, "..", "templates", "default-header.xml");
-        let xml_bytes = fs.readFileSync(_path, 'utf-8');
-        return xml_bytes;
+        //let _path = path.join(__dirname, "..", "templates", "default-header.xml");
+        //let xml_bytes = fs.readFileSync(_path, 'utf-8');
+        //return xml_bytes;
+        return header;
     }
 }
 

@@ -165,6 +165,9 @@ class Document extends ElementProxy {
         section = this.sections.slice(-1)[0];
         return new Emu(section.page_width - section.left_margin - section.right_margin);
     }
+    get content(){
+        return this._body.content;
+    }
     get _body() {
         /*
         The |_Body| instance containing the content for this document.
