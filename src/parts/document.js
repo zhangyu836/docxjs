@@ -112,7 +112,7 @@ class DocumentPart extends BaseStoryPart {
         Save this document to *path_or_stream*, which can be either a path to
         a filesystem location (a string) or a file-like object.
         */
-        this._package.save(path_or_stream);
+        return this._package.save(path_or_stream);
     }
     get settings() {
         /*

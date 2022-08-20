@@ -127,7 +127,7 @@ class Document extends ElementProxy {
         Save this document to *path_or_stream*, which can be either a path to
         a filesystem location (a string) or a file-like object.
         */
-        this._part.save(path_or_stream);
+        return this._part.save(path_or_stream);
     }
     get sections() {
         /* |Sections| object providing access to each section in this document. */

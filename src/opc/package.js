@@ -195,7 +195,7 @@ class OpcPackage  {
         */
         for (let part of this.parts)
             part.before_marshal();
-        PackageWriter.write(pkg_file, this.rels, this.parts);
+        return PackageWriter.write(pkg_file, this.rels, this.parts);
     }
     get _core_properties_part() {
         /*

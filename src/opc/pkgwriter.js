@@ -28,7 +28,7 @@ class PackageWriter  {
         PackageWriter._write_content_types_stream(phys_writer, parts);
         PackageWriter._write_pkg_rels(phys_writer, pkg_rels);
         PackageWriter._write_parts(phys_writer, parts);
-        phys_writer.close();
+        return phys_writer.close();
     }
     static _write_content_types_stream(phys_writer, parts) {
         /*

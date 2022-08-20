@@ -138,12 +138,13 @@ class _ZipPkgWriter {
         Close the zip archive, flushing any pending physical writes and
         releasing any resources it's using.
         */
+        this.zipExport.src_unzipped = false;
+        this.zipExport.compressed = true;
         if(is_string(this.pkg_file)) {
-            this.zipExport.src_unzipped = false;
-            this.zipExport.compressed = true;
             this.zipExport.save(this.pkg_file);
+        } else {
+            return this.zipExport.memory();
         }
-
     }
     write(pack_uri, blob) {
         /*
