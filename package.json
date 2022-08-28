@@ -1,6 +1,6 @@
 {
   "name": "@zhangyu836/docxjs",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Javascript port of python-docx.",
   "main": "dist/api.js",
   "author": "Zhang Yu",
