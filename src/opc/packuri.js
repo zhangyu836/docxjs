@@ -4,7 +4,7 @@ such as PACKAGE_URI.
 */
 let path = require('path');
 let posixpath = path.posix ? path.posix : path;
-let {ValueError} = require('./exceptions');
+let {ValueError} = require('../exceptions');
 
 class PackURI extends String {
     /*

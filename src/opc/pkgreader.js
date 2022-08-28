@@ -7,7 +7,7 @@ let {parse_xml} = require('../oxml/xmlhandler');
 let {PACKAGE_URI, PackURI} = require('./packuri');
 let {PhysPkgReader} = require('./phys_pkg');
 let {CaseInsensitiveDict} = require('./shared');
-let {ValueError, KeyError} = require('./exceptions');
+let {ValueError, KeyError} = require('../exceptions');
 let {getType} = require('../oxml/simpletypes')
 class PackageReader  {
     /*

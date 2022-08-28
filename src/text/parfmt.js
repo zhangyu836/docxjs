@@ -5,6 +5,7 @@ Paragraph-related proxy types.
 let {WD_LINE_SPACING} = require('../enum/text');
 let {ElementProxy, Emu, Length, Pt, Twips} = require('../shared');
 let {TabStops} = require('./tabstops');
+let {Font} = require('./font');
 
 
 class ParagraphFormat extends ElementProxy {
@@ -314,6 +315,18 @@ class ParagraphFormat extends ElementProxy {
             }
         }
         return lineRule;
+    }
+    get font() {
+        let pPr;
+        pPr = this._element.pPr;
+        if (pPr === null) {
+            return null;
+        }
+        let rPr = pPr.rPr;
+        if (rPr === null) {
+            return null;
+        }
+        return new Font(pPr);
     }
 }
 

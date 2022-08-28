@@ -4,7 +4,8 @@ Custom element classes related to paragraph properties (CT_PPr).
 let {WD_ALIGN_PARAGRAPH, WD_LINE_SPACING,
     WD_TAB_ALIGNMENT, WD_TAB_LEADER} = require('../../enum/text');
 let {Length} = require('../../shared');
-let {ST_SignedTwipsMeasure, ST_TwipsMeasure} = require('../simpletypes');
+let {ST_SignedTwipsMeasure, ST_TwipsMeasure, ST_String,
+    ST_HpsMeasure, ST_HexColor} = require('../simpletypes');
 let {BaseOxmlElement, OneOrMore, OptionalAttribute,
     RequiredAttribute, ZeroOrOne} = require('../xmlchemy');
 
@@ -24,6 +25,21 @@ class CT_Jc extends BaseOxmlElement {
     ``<w:jc>`` element, specifying paragraph justification.
     */
     val = new RequiredAttribute('w:val', WD_ALIGN_PARAGRAPH);
+}
+class CT_Borders extends BaseOxmlElement {
+    top = new ZeroOrOne('w:top');
+    bottom = new ZeroOrOne('w:bottom');
+    left = new ZeroOrOne('w:left');
+    right = new ZeroOrOne('w:right');
+    insideH = new ZeroOrOne('w:insideH');
+    insideV = new ZeroOrOne('w:insideV');
+}
+class CT_Border extends BaseOxmlElement {
+    val = new OptionalAttribute('w:val', ST_String);
+    sz = new OptionalAttribute('w:sz', ST_HpsMeasure);
+    space = new OptionalAttribute("w:space", ST_String);
+    color = new OptionalAttribute('w:color', ST_HexColor);
+    //themeColor = new OptionalAttribute('w:themeColor', MSO_THEME_COLOR);
 }
 let _tag_seq = [
     'w:pStyle', 'w:keepNext', 'w:keepLines', 'w:pageBreakBefore',
@@ -47,10 +63,13 @@ class CT_PPr extends BaseOxmlElement {
     pageBreakBefore = new ZeroOrOne('w:pageBreakBefore', _tag_seq.slice(4));
     widowControl = new ZeroOrOne('w:widowControl', _tag_seq.slice(6));
     numPr = new ZeroOrOne('w:numPr', _tag_seq.slice(7));
+    pBdr = new ZeroOrOne('w:pBdr', _tag_seq.slice(9));
     tabs = new ZeroOrOne('w:tabs', _tag_seq.slice(11));
     spacing = new ZeroOrOne('w:spacing', _tag_seq.slice(22));
     ind = new ZeroOrOne('w:ind', _tag_seq.slice(23));
     jc = new ZeroOrOne('w:jc', _tag_seq.slice(27));
+    textAlignment = new ZeroOrOne('w:textAlignment', _tag_seq.slice(29));
+    rPr = new ZeroOrOne('w:rPr', _tag_seq.slice(34));
     sectPr = new ZeroOrOne('w:sectPr', _tag_seq.slice(35));
     //del _tag_seq
     get first_line_indent() {
@@ -368,4 +387,5 @@ class CT_TabStops extends BaseOxmlElement {
     }
 }
 
-module.exports = {CT_Ind, CT_Jc, CT_PPr, CT_Spacing, CT_TabStop, CT_TabStops};
+module.exports = {CT_Ind, CT_Jc, CT_PPr, CT_Spacing, CT_TabStop, CT_TabStops,
+    CT_Borders, CT_Border};

@@ -3,7 +3,7 @@
 Custom element classes related to the numbering part
 */
 let {CT_DecimalNumber} = require('./shared');
-let {ST_DecimalNumber} = require('./simpletypes');
+let {ST_DecimalNumber, ST_String} = require('./simpletypes');
 let {BaseOxmlElement, OneAndOnlyOne, RequiredAttribute,
     ZeroOrMore, ZeroOrOne, OxmlElement} = require('./xmlchemy');
 let {KeyError} = require('../exceptions');
@@ -114,4 +114,19 @@ class CT_Numbering extends BaseOxmlElement {
     }
 }
 
-module.exports = {CT_Num, CT_NumLvl, CT_NumPr, CT_Numbering};
+class CT_AbstractNum extends BaseOxmlElement {
+    lvl = new ZeroOrOne('w:lvl');
+    abstractNumId = new RequiredAttribute('w:abstractNumId', ST_String);
+}
+class CT_Lvl extends BaseOxmlElement {
+    ilvl = new RequiredAttribute('w:ilvl', ST_DecimalNumber);
+    start = new ZeroOrOne('w:start');
+    numFmt = new ZeroOrOne('w:numFmt');
+    pStyle = new ZeroOrOne('w:pStyle');
+    lvlText = new ZeroOrOne('w:lvlText');
+    lvlJc = new ZeroOrOne('w:lvlJc');
+    pPr = new ZeroOrOne('w:pPr');
+}
+
+module.exports = {CT_Num, CT_NumLvl, CT_NumPr, CT_Numbering,
+    CT_AbstractNum, CT_Lvl};

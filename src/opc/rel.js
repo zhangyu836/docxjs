@@ -3,7 +3,7 @@
 Relationship-related objects.
 */
 let {CT_Relationships} = require('./oxml');
-let {ValueError, KeyError} = require('./exceptions')
+let {ValueError, KeyError} = require('../exceptions')
 
 class Relationships extends Map {
     /*
