@@ -7,7 +7,8 @@ let {CT_DecimalNumber, CT_OnOff, CT_String} = require('./shared');
 let {CT_CoreProperties} = require('./coreprops');
 let {CT_Body, CT_Document} = require('./document');
 let {CT_Num, CT_NumLvl, CT_NumPr, CT_Numbering, CT_AbstractNum, CT_Lvl} = require('./numbering');
-let {CT_HdrFtr, CT_HdrFtrRef, CT_PageMar, CT_PageSz, CT_SectPr, CT_SectType} = require('./section');
+let {CT_HdrFtr, CT_HdrFtrRef, CT_PageMar, CT_PageSz, CT_SectPr, CT_SectType,
+    CT_Column, CT_Columns} = require('./section');
 let {CT_Settings} = require('./settings');
 let {CT_Blip, CT_BlipFillProperties, CT_GraphicalObject, CT_GraphicalObjectData,
     CT_Inline, CT_NonVisualDrawingProps, CT_Picture, CT_PictureNonVisual, CT_Point2D,
@@ -65,6 +66,8 @@ register_element_cls("w:hdr", CT_HdrFtr);
 register_element_cls("w:headerReference", CT_HdrFtrRef);
 register_element_cls("w:pgMar", CT_PageMar);
 register_element_cls("w:pgSz", CT_PageSz);
+register_element_cls("w:col", CT_Column);
+register_element_cls("w:cols", CT_Columns);
 register_element_cls("w:sectPr", CT_SectPr);
 register_element_cls("w:type", CT_SectType);
 register_element_cls("w:settings", CT_Settings);

@@ -1,6 +1,7 @@
 /* Section-related custom element classes */
 let {WD_HEADER_FOOTER, WD_ORIENTATION, WD_SECTION_START} = require('../enum/section');
-let {ST_SignedTwipsMeasure, ST_TwipsMeasure, XsdString} = require('./simpletypes');
+let {ST_SignedTwipsMeasure, ST_TwipsMeasure, XsdString,
+    ST_OnOff, ST_DecimalNumber} = require('./simpletypes');
 let {BaseOxmlElement, OptionalAttribute, RequiredAttribute,
     ZeroOrMore, ZeroOrOne} = require('./xmlchemy');
 
@@ -42,6 +43,18 @@ class CT_PageSz extends BaseOxmlElement {
     w = new OptionalAttribute('w:w', ST_TwipsMeasure);
     h = new OptionalAttribute('w:h', ST_TwipsMeasure);
     orient = new OptionalAttribute('w:orient', WD_ORIENTATION, WD_ORIENTATION.PORTRAIT);
+}
+
+class CT_Column extends BaseOxmlElement {
+    w = new OptionalAttribute('w:w', ST_TwipsMeasure);
+    space = new OptionalAttribute('w:space', ST_TwipsMeasure);
+}
+
+class CT_Columns extends BaseOxmlElement {
+    equalWidth = new OptionalAttribute('w:equalWidth', ST_OnOff, true);
+    num = new OptionalAttribute('w:num', ST_DecimalNumber);
+    space = new OptionalAttribute('w:space', ST_TwipsMeasure);
+    col = new ZeroOrMore('w:col');
 }
 let _tag_seq = [
     'w:footnotePr', 'w:endnotePr', 'w:type', 'w:pgSz', 'w:pgMar', 'w:paperSrc',
@@ -361,4 +374,5 @@ class CT_SectType extends BaseOxmlElement {
 }
 
 
-module.exports = {CT_HdrFtr, CT_HdrFtrRef, CT_PageMar, CT_PageSz, CT_SectPr, CT_SectType};
+module.exports = {CT_HdrFtr, CT_HdrFtrRef, CT_PageMar, CT_PageSz,
+    CT_SectPr, CT_SectType, CT_Column, CT_Columns};
