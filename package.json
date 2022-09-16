@@ -1,6 +1,6 @@
 {
   "name": "@zhangyu836/docxjs",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Javascript port of python-docx.",
   "main": "dist/api.js",
   "author": "Zhang Yu",
@@ -11,9 +11,7 @@
     "url": "https://github.com/zhangyu836/docxjs.git"
   },
   "files": [
-    "dist",
-    "LICENSE",
-    "README.md"
+    "dist"
   ],
   "scripts": {
     "build": "grunt build",
@@ -29,7 +27,7 @@
   ],
   "dependencies": {
     "@xmldom/xmldom": "^0.8.2",
-    "zip-local": "^0.3.5",
+    "adm-zip": "^0.5.9",
     "shasum-object": "^1.0.0",
     "xpath": "^0.0.32"
   },

@@ -6,6 +6,7 @@ let {WD_STYLE_TYPE} = require('../enum/style');
 let {ParagraphFormat} = require('./parfmt');
 let {Run} = require('./run');
 let {Parented} = require('../shared');
+//let {Section} = require('../section');
 class Paragraph extends Parented {
     /*
     Proxy object wrapping ``<w:p>`` element.
@@ -90,6 +91,12 @@ class Paragraph extends Parented {
         }
         return a;
     }
+    /*get section() {
+        if(this.p.sectPr){
+            return new Section(this.p.sectPr, this._part);
+        }
+        return null;
+    }*/
     get style() {
         /*
         Read/Write. |_ParagraphStyle| object representing the style assigned

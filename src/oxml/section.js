@@ -57,6 +57,7 @@ class CT_SectPr extends BaseOxmlElement {
     type = new ZeroOrOne("w:type", _tag_seq.slice(3));
     pgSz = new ZeroOrOne("w:pgSz", _tag_seq.slice(4));
     pgMar = new ZeroOrOne("w:pgMar", _tag_seq.slice(5));
+    cols = new ZeroOrOne("w:cols", _tag_seq.slice(10));
     titlePg = new ZeroOrOne("w:titlePg", _tag_seq.slice(14));
     //del _tag_seq
     add_footerReference(type_, rId) {

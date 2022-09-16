@@ -3,7 +3,7 @@ Provides a general interface to a *physical* OPC package, such as a zip file.
 */
 let path = require('path');
 let fs = require('fs');
-let zipper = require('zip-local');
+let AdmZip = require('adm-zip');
 let {is_string} = require('./compat');
 let {CONTENT_TYPES_URI} = require('./packuri');
 function isdir(_path){
@@ -86,19 +86,17 @@ class _ZipPkgReader {
     Implements |PhysPkgReader| interface for a zip file OPC package.
     */
     constructor(pkg_file) {
-        //if(!pkg_file) return;
-        this._zipf = zipper.sync.unzip(pkg_file).memory();
+        this._zipf = new AdmZip(pkg_file);
     }
     blob_for(pack_uri, xml=false) {
         /*
         Return blob corresponding to *pack_uri*. Raises |ValueError| if no
         matching member is present in zip archive.
         */
-        let files = this._zipf.unzipped_file.files;
-        let file = files[pack_uri.membername];
-        if(file)
-            if(xml) return file.asText();
-            else return file.asNodeBuffer();
+        let entry = this._zipf.getEntry(pack_uri.membername)
+        if(entry)
+            if(xml) return entry.getData().toString();
+            else return entry.getData();
         return null;
     }
     close() {
@@ -127,10 +125,7 @@ class _ZipPkgWriter {
     */
     constructor(pkg_file) {
         this.pkg_file = pkg_file;
-        //if(!is_string(pkg_file)) return;
-        let buf = Buffer.from('UEsFBgAAAAAAAAAAAAAAAAAAAAAAAA==', 'base64');
-        this.zipExport = zipper.sync.unzip(buf);
-        this._zipf = this.zipExport.memory();
+        this._zipf = new AdmZip();
     }
 
     close() {
@@ -138,12 +133,10 @@ class _ZipPkgWriter {
         Close the zip archive, flushing any pending physical writes and
         releasing any resources it's using.
         */
-        this.zipExport.src_unzipped = false;
-        this.zipExport.compressed = true;
         if(is_string(this.pkg_file)) {
-            this.zipExport.save(this.pkg_file);
+            this._zipf.writeZip(this.pkg_file);
         } else {
-            return this.zipExport.memory();
+            return this._zipf.toBuffer();
         }
     }
     write(pack_uri, blob) {
@@ -151,7 +144,7 @@ class _ZipPkgWriter {
         Write *blob* to this zip package with the membername corresponding to
         *pack_uri*.
         */
-        this._zipf.unzipped_file.file(pack_uri.membername, blob);
+        this._zipf.addFile(pack_uri.membername, blob)
     }
 }
 

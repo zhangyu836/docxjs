@@ -12,7 +12,8 @@ let {CT_Settings} = require('./settings');
 let {CT_Blip, CT_BlipFillProperties, CT_GraphicalObject, CT_GraphicalObjectData,
     CT_Inline, CT_NonVisualDrawingProps, CT_Picture, CT_PictureNonVisual, CT_Point2D,
     CT_PositiveSize2D, CT_ShapeProperties, CT_Transform2D} = require('./shape');
-let {CT_LatentStyles, CT_LsdException, CT_Style, CT_Styles} = require('./styles');
+let {CT_LatentStyles, CT_LsdException, CT_Style, CT_Styles,
+    CT_DocDefaults, CT_PPrDefault, CT_RPrDefault} = require('./styles');
 let {CT_Height, CT_Row, CT_Tbl, CT_TblGrid, CT_TblGridCol, CT_TblLayoutType,
     CT_TblPr, CT_TblWidth, CT_Tc, CT_TcPr, CT_TrPr, CT_VMerge, CT_VerticalJc,
     CT_Bidi} = require('./table');
@@ -91,6 +92,9 @@ register_element_cls("w:qFormat", CT_OnOff);
 register_element_cls("w:semiHidden", CT_OnOff);
 register_element_cls("w:style", CT_Style);
 register_element_cls("w:styles", CT_Styles);
+register_element_cls("w:docDefaults", CT_DocDefaults);
+register_element_cls("w:rPrDefault", CT_RPrDefault);
+register_element_cls("w:pPrDefault", CT_PPrDefault);
 register_element_cls("w:uiPriority", CT_DecimalNumber);
 register_element_cls("w:unhideWhenUsed", CT_OnOff);
 register_element_cls("w:bidiVisual",  CT_Bidi);//CT_OnOff);//,
@@ -150,6 +154,7 @@ register_element_cls('w:left', CT_Border);
 register_element_cls('w:right', CT_Border);
 register_element_cls('w:insideH', CT_Border);
 register_element_cls('w:insideV', CT_Border);
+register_element_cls('w:bdr', CT_Border);
 register_element_cls('w:textAlignment', CT_String);
 register_element_cls("w:pPr", CT_PPr);
 register_element_cls("w:pStyle", CT_String);

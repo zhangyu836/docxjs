@@ -4,7 +4,9 @@ let {ElementProxy} = require('../shared');
 let BabelFish = require('./babelfish');
 let {LatentStyles} = require('./latent');
 let {BaseStyle, StyleFactory} = require('./style');
-let {KeyError, ValueError} = require('../exceptions')
+let {KeyError, ValueError} = require('../exceptions');
+let {Font} = require('../text/font');
+let {ParagraphFormat} = require('../text/parfmt');
 
 
 class Styles extends ElementProxy {
@@ -156,6 +158,22 @@ class Styles extends ElementProxy {
             return null;
         }
         return style.style_id;
+    }
+    default_format() {
+        let docDefaults = this._element.docDefaults;
+        if(docDefaults){
+            let pPrDefault = docDefaults.pPrDefault;
+            if(pPrDefault) return new ParagraphFormat(pPrDefault);
+        }
+        return null;
+    }
+    default_font() {
+        let docDefaults = this._element.docDefaults
+        if(docDefaults){
+            let rPrDefault = docDefaults.rPrDefault;
+            if(rPrDefault) return new Font(rPrDefault);
+        }
+        return null;
     }
 }
 

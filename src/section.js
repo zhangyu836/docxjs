@@ -359,7 +359,7 @@ class _Footer extends _BaseHeaderFooter {
         /* True if a footer is defined for this section. */
         let footerReference;
         footerReference = this._sectPr.get_footerReference(this._hdrftr_index);
-        return footerReference === null ? false : true;
+        return footerReference !== null;
     }
     get _prior_headerfooter() {
         /* |_Footer| proxy on prior sectPr element or None if this is first section. */
@@ -401,7 +401,7 @@ class _Header extends _BaseHeaderFooter {
         /* True if a header is explicitly defined for this section. */
         let headerReference;
         headerReference = this._sectPr.get_headerReference(this._hdrftr_index);
-        return headerReference === null ? false : true;
+        return headerReference !== null;
     }
     get _prior_headerfooter() {
         /* |_Header| proxy on prior sectPr element or None if this is first section. */

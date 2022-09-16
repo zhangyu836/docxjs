@@ -52,6 +52,14 @@ class CT_P extends BaseOxmlElement {
             this.remove(child);
         }
     }
+    get sectPr() {
+        let pPr;
+        pPr = this.pPr;
+        if (pPr === null) {
+            return null;
+        }
+        return pPr.sectPr;
+    }
     set_sectPr(sectPr) {
         /*
         Unconditionally replace or add *sectPr* as a grandchild in the

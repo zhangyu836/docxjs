@@ -305,6 +305,7 @@ class CT_Styles extends BaseOxmlElement {
     styles.xml
     del _tag_seq
     */
+    docDefaults = new ZeroOrOne('w:docDefaults', _tag_seq2.slice(1));
     latentStyles = new ZeroOrOne('w:latentStyles', _tag_seq2.slice(2));
     style = new ZeroOrMore('w:style', );
 
@@ -369,5 +370,16 @@ class CT_Styles extends BaseOxmlElement {
         //return styles;
     }
 }
+class CT_DocDefaults extends BaseOxmlElement {
+    pPrDefault = new ZeroOrOne('w:pPrDefault');
+    rPrDefault = new ZeroOrOne('w:rPrDefault');
+}
+class CT_PPrDefault extends BaseOxmlElement {
+    pPr = new ZeroOrOne('w:pPr');
+}
+class CT_RPrDefault extends BaseOxmlElement {
+    rPr = new ZeroOrOne('w:rPr');
+}
 
-module.exports = {CT_LatentStyles, CT_LsdException, CT_Style, CT_Styles};
+module.exports = {CT_LatentStyles, CT_LsdException, CT_Style, CT_Styles,
+    CT_DocDefaults, CT_PPrDefault, CT_RPrDefault};

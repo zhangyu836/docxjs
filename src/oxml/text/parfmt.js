@@ -64,6 +64,7 @@ class CT_PPr extends BaseOxmlElement {
     widowControl = new ZeroOrOne('w:widowControl', _tag_seq.slice(6));
     numPr = new ZeroOrOne('w:numPr', _tag_seq.slice(7));
     pBdr = new ZeroOrOne('w:pBdr', _tag_seq.slice(9));
+    shd = new ZeroOrOne('w:shd', _tag_seq.slice(10));
     tabs = new ZeroOrOne('w:tabs', _tag_seq.slice(11));
     spacing = new ZeroOrOne('w:spacing', _tag_seq.slice(22));
     ind = new ZeroOrOne('w:ind', _tag_seq.slice(23));

@@ -129,6 +129,12 @@ class Document extends ElementProxy {
         */
         return this._part.save(path_or_stream);
     }
+    get section() {
+        if(this._body.sectPr){
+            return new Section(this._body.sectPr, this._part);
+        }
+        return null;
+    }
     get sections() {
         /* |Sections| object providing access to each section in this document. */
         return new Sections(this._element, this._part);
@@ -196,6 +202,9 @@ class _Body extends BlockItemContainer {
         */
         this._body.clear_content();
         return this;
+    }
+    get sectPr() {
+        return this._body.sectPr;
     }
 }
 

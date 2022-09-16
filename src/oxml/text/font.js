@@ -77,6 +77,7 @@ class CT_RPr extends BaseOxmlElement {
     sz = new ZeroOrOne('w:sz', _tag_seq.slice(24));
     highlight = new ZeroOrOne('w:highlight', _tag_seq.slice(26));
     u = new ZeroOrOne('w:u', _tag_seq.slice(27));
+    bdr = new ZeroOrOne('w:bdr', _tag_seq.slice(29));
     vertAlign = new ZeroOrOne('w:vertAlign', _tag_seq.slice(32));
     rtl = new ZeroOrOne('w:rtl', _tag_seq.slice(33));
     cs = new ZeroOrOne('w:cs', _tag_seq.slice(34));
