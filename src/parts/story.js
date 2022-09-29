@@ -25,6 +25,9 @@ class BaseStoryPart extends XmlPart {
         rId = this.relate_to(image_part, RT.IMAGE);
         return [rId, image_part.image];
     }
+    get_rel_by_rid(rId) {
+        return this.rels.get(rId);
+    }
     get_style(style_id, style_type) {
         /*Return the style in this document matching *style_id*.
 

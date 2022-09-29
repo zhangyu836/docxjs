@@ -24,6 +24,7 @@ let {CT_P} = require('./text/paragraph');
 let {CT_Ind, CT_Jc, CT_PPr, CT_Spacing, CT_TabStop, CT_TabStops,
     CT_Borders, CT_Border} = require('./text/parfmt');
 let {CT_Br, CT_R, CT_Text} = require('./text/run');
+let {CT_Hyperlink} = require('./text/hyperlink');
 let {register_element_cls} = require('./xmlelemlookup');
 
 /* moved to xmlhandler.js parseFromString
@@ -167,6 +168,7 @@ register_element_cls("w:tabs", CT_TabStops);
 register_element_cls("w:widowControl", CT_OnOff);
 register_element_cls("w:br", CT_Br);
 register_element_cls("w:r", CT_R);
+register_element_cls("w:hyperlink", CT_Hyperlink);
 register_element_cls("w:t", CT_Text);
 register_element_cls("default", BaseOxmlElement);
 

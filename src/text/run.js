@@ -57,7 +57,7 @@ class Run extends Parented {
         let inline;
         inline = this.part.new_pic_inline(image_path_or_stream, width, height);
         this._r.add_drawing(inline);
-        return new InlineShape(inline);
+        return new InlineShape(inline, this);
     }
     add_tab() {
         /*

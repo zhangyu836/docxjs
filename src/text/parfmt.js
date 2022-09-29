@@ -331,4 +331,4 @@ class ParagraphFormat extends ElementProxy {
 }
 
 
-module.exports = {TabStops, ParagraphFormat}
+module.exports = {ParagraphFormat}

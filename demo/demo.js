@@ -30,7 +30,7 @@ let records = [
     [4, '631', 'Spam, spam, eggs, and spam']
 ];
 
-let table = document.add_table(1, 3);
+let table = document.add_table(1, 3, style='Light Shading Accent 1');
 let hdr_cells = table.rows[0].cells;
 hdr_cells[0].text = 'Qty';
 hdr_cells[1].text = 'Id';

@@ -29,11 +29,11 @@ class InlineShapes extends Parented {
             msg = `inline shape index [${idx}] out of range`;
             throw new IndexError(msg);
         }
-        return new InlineShape(inline);
+        return new InlineShape(inline, this);
     }
     *iter() {
         for(let  inline of this._inline_lst){
-            yield new InlineShape(inline)
+            yield new InlineShape(inline, this)
         }
     }
     get length() {
@@ -46,12 +46,13 @@ class InlineShapes extends Parented {
         return body.xpath(xpath);
     }
 }
-class InlineShape  {
+class InlineShape extends Parented {
     /*
     Proxy for an ``<wp:inline>`` element, representing the container for an
     inline graphical object.
     */
-    constructor(inline) {
+    constructor(inline, parent) {
+        super(parent);
         this._inline = inline;
     }
     get height() {
@@ -64,6 +65,13 @@ class InlineShape  {
     set height(cy) {
         this._inline.extent.cy = cy;
         this._inline.graphic.graphicData.pic.spPr.cy = cy;
+    }
+    get target_part(){
+        if(this.type===WD_INLINE_SHAPE.PICTURE){
+            let rId = this._inline.graphic.graphicData.pic.blipFill.blip.embed;
+            let ref = this.part.get_rel_by_rid(rId);
+            return ref.target_part;
+        }
     }
     get type() {
         /*

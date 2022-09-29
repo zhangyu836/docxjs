@@ -6,7 +6,7 @@ let {WD_CELL_VERTICAL_ALIGNMENT, WD_ROW_HEIGHT_RULE,
 let {nsdecls} = require('./ns');
 let {Emu, Twips} = require('../shared');
 let {ST_OnOff, ST_Merge, ST_TblLayoutType, ST_TblWidth,
-    ST_TwipsMeasure, XsdInt} = require('./simpletypes');
+    ST_TwipsMeasure, XsdInt, ST_String} = require('./simpletypes');
 let {BaseOxmlElement, OneAndOnlyOne, OneOrMore, OptionalAttribute,
     RequiredAttribute, ZeroOrMore, ZeroOrOne} = require('./xmlchemy');
 let {InvalidSpanError, ValueError} = require('../exceptions');
@@ -281,8 +281,16 @@ class CT_TblPr extends BaseOxmlElement {
     */
     tblStyle = new ZeroOrOne('w:tblStyle', _tag_seq.slice(1));
     bidiVisual = new ZeroOrOne('w:bidiVisual', _tag_seq.slice(4));
+    tblStyleRowBandSize = new ZeroOrOne('w:tblStyleRowBandSize', _tag_seq.slice(5));
+    tblStyleColBandSize = new ZeroOrOne('w:tblStyleColBandSize', _tag_seq.slice(6));
+    tblW = new ZeroOrOne('w:tblW', _tag_seq.slice(7));
     jc = new ZeroOrOne('w:jc', _tag_seq.slice(8));
+    tblCellSpacing = new ZeroOrOne('w:tblCellSpacing', _tag_seq.slice(9));
+    tblInd = new ZeroOrOne('w:tblInd', _tag_seq.slice(10));
+    tblBorders = new ZeroOrOne('w:tblBorders', _tag_seq.slice(11));
+    shd = new ZeroOrOne('w:shd', _tag_seq.slice(12));
     tblLayout = new ZeroOrOne('w:tblLayout', _tag_seq.slice(13));
+    tblCellMar = new ZeroOrOne('w:tblCellMar', _tag_seq.slice(14));
     get alignment() {
         /*
         Member of :ref:`WdRowAlignment` enumeration or |None|, based on the
@@ -800,6 +808,9 @@ class CT_TcPr extends BaseOxmlElement {
     tcW = new ZeroOrOne('w:tcW', _tag_seq2.slice(2));
     gridSpan = new ZeroOrOne('w:gridSpan', _tag_seq2.slice(3));
     vMerge = new ZeroOrOne('w:vMerge', _tag_seq2.slice(5));
+    tcBorders = new ZeroOrOne('w:tcBorders', _tag_seq2.slice(6));
+    shd = new ZeroOrOne('w:shd', _tag_seq2.slice(7));
+    tcMar = new ZeroOrOne('w:tcMar', _tag_seq2.slice(9));
     vAlign = new ZeroOrOne('w:vAlign', _tag_seq2.slice(12));
     get grid_span() {
         /*
@@ -936,6 +947,15 @@ class CT_VMerge extends BaseOxmlElement {
     ``<w:vMerge>`` element, specifying vertical merging behavior of a cell.
     */
     val = new OptionalAttribute('w:val', ST_Merge, ST_Merge.CONTINUE);
+}
+
+class CT_TblStylePr extends BaseOxmlElement {
+    pPr = new ZeroOrOne('w:pPr');
+    rPr = new ZeroOrOne('w:rPr');
+    tblPr = new ZeroOrOne('w:tblPr');
+    trPr = new ZeroOrOne('w:trPr');
+    tcPr = new ZeroOrOne('w:tcPr');
+    type = new RequiredAttribute('w:type', ST_String);
 }
 
 module.exports = {CT_Height, CT_Row, CT_Tbl, CT_TblGrid, CT_TblGridCol, CT_TblLayoutType,

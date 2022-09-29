@@ -10,6 +10,7 @@ class CT_P extends BaseOxmlElement {
     */
     pPr = new ZeroOrOne("w:pPr");
     r = new ZeroOrMore("w:r");
+    hyperlink = new ZeroOrMore("w:hyperlink");
 
     _insert_pPr(pPr) {
         this.insert(0, pPr);

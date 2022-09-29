@@ -3,10 +3,12 @@ Paragraph-related proxy types.
 */
 
 let {WD_STYLE_TYPE} = require('../enum/style');
+let {RT} = require('../opc/constants');
 let {ParagraphFormat} = require('./parfmt');
 let {Run} = require('./run');
+let {Hyperlink} = require('./hyperlink');
 let {Parented} = require('../shared');
-//let {Section} = require('../section');
+
 class Paragraph extends Parented {
     /*
     Proxy object wrapping ``<w:p>`` element.
@@ -14,6 +16,15 @@ class Paragraph extends Parented {
     constructor(p, parent) {
         super(parent);
         this._p = this._element = p;
+    }
+    add_hyperlink(target, text=null, style=null){
+        let _hyperlink = this._p.add_hyperlink();
+        _hyperlink.rId = this.part.relate_to(target, RT.HYPERLINK, true);
+        let hyperlink = new Hyperlink(_hyperlink, this);
+        if (text) {
+            hyperlink.add_run(text, style);
+        }
+        return hyperlink;
     }
     add_run(text = null, style = null) {
         /*
@@ -56,6 +67,20 @@ class Paragraph extends Parented {
         this._p.clear_content();
         return this;
     }
+    get content() {
+        /*
+        Sequence of |Run| and |Hyperlink| instances.
+        */
+        let a = [];
+        for(let c of this._p.slice(0)){
+            if(c.tagName==="w:r")
+                a.push(new Run(c, this));
+            else if(c.tagName==="w:hyperlink"){
+                a.push(new Hyperlink(c, this));
+            }
+        }
+        return a;
+    }
     insert_paragraph_before(text = null, style = null) {
         /*
         Return a newly created paragraph, inserted directly before this
@@ -91,12 +116,13 @@ class Paragraph extends Parented {
         }
         return a;
     }
-    /*get section() {
+    get section() {
         if(this.p.sectPr){
+            let {Section} = require('../section');
             return new Section(this.p.sectPr, this._part);
         }
         return null;
-    }*/
+    }
     get style() {
         /*
         Read/Write. |_ParagraphStyle| object representing the style assigned
@@ -130,8 +156,8 @@ class Paragraph extends Parented {
         */
         let text;
         text = "";
-        for (let run of this.runs) {
-            text += run.text;
+        for (let child of this.content) {
+            text += child.text;
         }
         return text;
     }
@@ -150,4 +176,4 @@ class Paragraph extends Parented {
     }
 }
 
-module.exports = {Run, Paragraph};
+module.exports = {Paragraph};

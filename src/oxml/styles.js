@@ -124,6 +124,10 @@ class CT_Style extends BaseOxmlElement {
     locked = new ZeroOrOne('w:locked', _tag_seq.slice(12));
     pPr = new ZeroOrOne('w:pPr', _tag_seq.slice(17));
     rPr = new ZeroOrOne('w:rPr', _tag_seq.slice(18));
+    tblPr = new ZeroOrOne('w:tblPr', _tag_seq.slice(19));
+    trPr = new ZeroOrOne('w:trPr', _tag_seq.slice(20));
+    tcPr = new ZeroOrOne('w:tcPr', _tag_seq.slice(21));
+    tblStylePr = new ZeroOrMore('w:tblStylePr', _tag_seq.slice(22));
     //del _tag_seq
     type = new OptionalAttribute('w:type', WD_STYLE_TYPE);
     styleId = new OptionalAttribute('w:styleId', ST_String);
