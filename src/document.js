@@ -162,6 +162,9 @@ class Document extends ElementProxy {
         */
         return this._body.tables;
     }
+    get text() {
+        return this._body.text;
+    }
     get _block_width() {
         /*
         Return a |Length| object specifying the width of available "writing"
@@ -194,15 +197,15 @@ class _Body extends BlockItemContainer {
         super(body_elm, parent);
         this._body = body_elm;
     }
-    clear_content() {
-        /*
+    /*clear_content() {
+
         Return this |_Body| instance after clearing it of all content.
         Section properties for the main document story, if present, are
         preserved.
-        */
+
         this._body.clear_content();
         return this;
-    }
+    }*/
     get sectPr() {
         return this._body.sectPr;
     }

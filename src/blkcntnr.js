@@ -86,6 +86,34 @@ class BlockItemContainer extends Parented {
         }
         return a;
     }
+    clear_content() {
+        this._element.clear_content();
+        return this;
+    }
+    get text() {
+        /*
+        The entire contents of this Container as a string of text. Assigning
+        a string to this property replaces all existing content with a single
+        paragraph containing the assigned text in a single run.
+        */
+        let a = [];
+        for(let child of this.content){
+            a.push(child.text)
+        }
+        return  a.join('\n');
+    }
+    set text(text) {
+        /*
+        Write-only. Set entire contents of Container to the string *text*. Any
+        existing content or revisions are replaced.
+        */
+        let  p, r;
+        let element = this._element;
+        element.clear_content();
+        p = element.add_p();
+        r = p.add_r();
+        r.text = text;
+    }
 }
 
 module.exports = {BlockItemContainer};

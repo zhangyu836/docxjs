@@ -157,24 +157,43 @@ class Table extends Parented {
     set table_direction(value) {
         this._element.bidiVisual_val = value;
     }
+    get text() {
+        let a = [];
+        for(let cell of this._cells) {
+            if(cell.merged) continue;
+            a.push(cell.text);
+        }
+        return a.join('\n');
+    }
     get _cells() {
         /*
         A sequence of |_Cell| objects, one for each cell of the layout grid.
         If the table contains a span, one or more |_Cell| object references
         are repeated.
         */
-        let  cells, col_count;
+        let cells, col_count;
         col_count = this._column_count;
         cells = [];
         for (let  tc of this._tbl.iter_tcs()) {
-            for (let  grid_span_idx = 0; grid_span_idx < tc.grid_span; grid_span_idx += 1) {
+            for (let grid_span_idx = 0; grid_span_idx < tc.grid_span; grid_span_idx += 1) {
                 if (tc.vMerge === ST_Merge.CONTINUE) {
-                    cells.push(cells.slice(-col_count)[0]);
+                    let master = cells.slice(-col_count)[0];
+                    if(master.merged) {
+                        master = master.master;
+                    }
+                    let merged = new MergedCell(master, 'v');
+                    cells.push(merged);
                 } else {
                     if (grid_span_idx > 0) {
-                        cells.push(cells.slice(-1)[0]);
+                        let master = cells.slice(-1)[0];
+                        if(master.merged) {
+                            master = master.master;
+                        }
+                        let merged = new MergedCell(master, 'h');
+                        cells.push(merged);
                     } else {
-                        cells.push(new _Cell(tc, this));
+                        let master = new _Cell(tc, this);
+                        cells.push(master);
                     }
                 }
             }
@@ -185,10 +204,26 @@ class Table extends Parented {
         /*
         The number of grid columns in this table.
         */
-        return this._tbl.col_count;
+        let col_count;
+        try {
+            col_count = this._tbl.col_count;
+        } catch (e) {
+            col_count = 0;
+            let tr = this._tbl.tr_lst[0];
+            for (let tc of tr.tc_lst) {
+                col_count += tc.grid_span;
+            }
+        }
+        return col_count;
     }
     get _tblPr() {
         return this._tbl.tblPr;
+    }
+}
+class MergedCell{
+    constructor(master, merged) {
+        this.master = master;
+        this.merged = merged;
     }
 }
 
@@ -197,20 +232,6 @@ class _Cell extends BlockItemContainer {
     constructor(tc, parent) {
         super(tc, parent);
         this._tc = this._element = tc;
-    }
-    add_paragraph(text = "", style = null) {
-        /*
-        Return a paragraph newly added to the end of the content in this
-        cell. If present, *text* is added to the paragraph in a single run.
-        If specified, the paragraph style *style* is applied. If *style* is
-        not specified or is |None|, the result is as though the 'Normal'
-        style was applied. Note that the formatting of text in a cell can be
-        influenced by the table style. *text* can contain tab (``\\t``)
-        characters, which are converted to the appropriate XML form for
-        a tab. *text* can also include newline (``\\n``) or carriage return
-        (``\\r``) characters, each of which is converted to a line break.
-        */
-        return super.add_paragraph(text, style);
     }
     add_table(rows, cols) {
         /*
@@ -225,6 +246,9 @@ class _Cell extends BlockItemContainer {
         this.add_paragraph();
         return table;
     }
+    get col_span() {
+        return this._tc.grid_span
+    }
     merge(other_cell) {
         /*
         Return a merged cell created by spanning the rectangular region
@@ -236,43 +260,8 @@ class _Cell extends BlockItemContainer {
         merged_tc = tc.merge(tc_2);
         return new _Cell(merged_tc, this._parent);
     }
-    get paragraphs() {
-        /*
-        List of paragraphs in the cell. A table cell is required to contain
-        at least one block-level element and end with a paragraph. By
-        default, a new cell contains a single paragraph. Read-only
-        */
-        return super.paragraphs;
-    }
-    get tables() {
-        /*
-        List of tables in the cell, in the order they appear. Read-only.
-        */
-        return super.tables;
-    }
-    get text() {
-        /*
-        The entire contents of this cell as a string of text. Assigning
-        a string to this property replaces all existing content with a single
-        paragraph containing the assigned text in a single run.
-        */
-        let a = [];
-        for(let p of this.paragraphs){
-            a.push(p.text)
-        }
-        return  a.join('\n');
-    }
-    set text(text) {
-        /*
-        Write-only. Set entire contents of cell to the string *text*. Any
-        existing content or revisions are replaced.
-        */
-        let  p, r, tc;
-        tc = this._tc;
-        tc.clear_content();
-        p = tc.add_p();
-        r = p.add_r();
-        r.text = text;
+    get row_span() {
+        return this._tc.bottom - this._tc._tr_idx;
     }
     get vertical_alignment() {
         /*Member of :ref:`WdCellVerticalAlignment` or None.
@@ -474,6 +463,44 @@ class _Rows extends Parented {
         Reference to the |Table| object this row collection belongs to.
         */
         return this._parent.table;
+    }
+    get rows_with_cells() {
+        let rows = [];
+        let rowx = 0
+        for (let tr of this._tbl.tr_lst) {
+            let row_cells = [];
+            let colx = 0;
+            for (let tc of tr.tc_lst) {
+                for (let grid_span_idx = 0; grid_span_idx < tc.grid_span; grid_span_idx += 1) {
+                    if (tc.vMerge === ST_Merge.CONTINUE) {
+                        let master = rows[rowx-1].row_cells[colx];
+                        if (master.merged) {
+                            master = master.master;
+                        }
+                        let merged = new MergedCell(master, 'v');
+                        row_cells.push(merged);
+                    } else {
+                        if (grid_span_idx > 0) {
+                            let master = row_cells[colx-1];
+                            if (master.merged) {
+                                master = master.master;
+                            }
+                            let merged = new MergedCell(master, 'h');
+                            row_cells.push(merged);
+                        } else {
+                            let master = new _Cell(tc, this);
+                            row_cells.push(master);
+                        }
+                    }
+                    colx += 1;
+                }
+            }
+            rowx += 1;
+            let row = new _Row(tr, this);
+            row.row_cells = row_cells;
+            rows.push(row);
+        }
+        return rows;
     }
 }
 

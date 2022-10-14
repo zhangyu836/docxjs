@@ -1,6 +1,5 @@
 let path = require('path')
-let {Document} = require('../src/api');
-let {Inches} = require('../src/shared');
+let {Document, shared, enums} = require('../src');
 
 let document = new Document();
 
@@ -22,7 +21,7 @@ document.add_paragraph(
 );
 
 let _path = path.join(__dirname, './monty-truth.png');
-document.add_picture(_path, width = new Inches(1.25));
+document.add_picture(_path, width = new shared.Inches(1.25));
 
 let records = [
     [3, '101', 'Spam'],
@@ -41,9 +40,21 @@ for(let [qty, id, desc] of records) {
     row_cells[1].text = id;
     row_cells[2].text = desc;
 }
-
-
-
 document.add_page_break();
+let table1 = document.add_table(1, 3, style='Light Shading Accent 2');
+hdr_cells = table1.rows[0].cells;
+hdr_cells[0].text = 'Qty';
+hdr_cells[1].text = 'Id';
+hdr_cells[2].text = 'Desc';
+for(let [qty, id, desc] of records) {
+    let row_cells = table1.add_row().cells;
+    row_cells[0].text = String(qty);
+    row_cells[1].text = id;
+    row_cells[2].text = desc;
+}
+let cells = table1._cells;
+let cell7 = cells[4]
+let cell11 = cells[11]
+cell7.merge(cell11);
 
 document.save('demo.docx');

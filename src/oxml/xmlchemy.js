@@ -396,7 +396,7 @@ class OneAndOnlyOne extends _BaseChildElement {
             let child = this.find(_this._nsptagname);
             if (child === null) {
                 throw new InvalidXmlError(
-                    `required ``<${_this._nsptagname}>`` child element not present"`
+                    `required "<${_this._nsptagname}>" child element not present`
                 );
             }
             return child;

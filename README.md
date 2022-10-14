@@ -1,11 +1,47 @@
+Since v0.2.0 this package is published to npm as docxyz.
 
-# docxjs
+# docxyz
 Javascript port of [python-docx](https://github.com/python-openxml/python-docx).  
 
 ## Installation
 ```shell
-npm i @zhangyu836/docxjs
+npm i docxyz
 ```
+
+## Usage
+
+####Write
+```javascript
+let {Document} = require('docxyz');
+let document = new Document();
+document.add_heading('Document Title', 0);
+let p = document.add_paragraph('A plain paragraph having some ');
+p.add_run('bold').bold = true;
+p.add_run(' and some ');
+p.add_run('italic.').italic = true;
+document.add_heading('Heading, level 1', level=1);
+document.add_paragraph('Intense quote', style='Intense Quote');
+document.save('demo.docx');
+```
+
+##### Read and write
+```javascript
+let {Document} = require('docxyz');
+let fileName = './demo.docx';
+let document = new Document(fileName);
+let text = document.text;
+console.log(text);
+let p = document.add_paragraph('Another plain paragraph having some ');
+p.add_run('bold').bold = true;
+p.add_run(' and some ');
+p.add_run('italic.').italic = true;
+document.add_heading('Heading, level 2', level=2);
+text = document.text;
+console.log(text);
+document.save('read_and_write.docx');
+```
+
+See [examples](https://github.com/zhangyu836/docxjs/tree/main/demo).
 
 ## Documentation
 Please read [python-docx documentation](https://python-docx.readthedocs.org/en/latest/) for now.

@@ -413,7 +413,7 @@ class CT_Tc extends BaseOxmlElement {
         //    new_children.push(tcPr);
         //}
         //this.slice(0) = new_children;
-        let tagNames = ["w:p", "w:tbl"];
+        let tagNames = ["w:p", "w:tbl", "w:sdt"];
         this.remove_all(tagNames);
     }
     get grid_span() {

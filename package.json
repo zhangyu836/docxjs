@@ -1,8 +1,8 @@
 {
-  "name": "@zhangyu836/docxjs",
-  "version": "0.1.9",
+  "name": "docxyz",
+  "version": "0.2.0",
   "description": "Javascript port of python-docx.",
-  "main": "dist/api.js",
+  "main": "src/index.js",
   "author": "Zhang Yu",
   "license": "MIT",
   "private": false,
@@ -11,7 +11,7 @@
     "url": "https://github.com/zhangyu836/docxjs.git"
   },
   "files": [
-    "dist"
+    "src"
   ],
   "scripts": {
     "build": "grunt build",
@@ -23,7 +23,7 @@
     "office",
     "word",
     "document",
-    "doc"
+    "docxyz"
   ],
   "dependencies": {
     "@xmldom/xmldom": "^0.8.2",

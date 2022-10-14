@@ -1,6 +1,5 @@
 let path = require('path')
-let {Document} = require('@zhangyu836/docxjs');
-let {Inches} = require('@zhangyu836/docxjs/dist/shared');
+let {Document, shared} = require('docxyz');
 
 let document = new Document();
 
@@ -22,7 +21,7 @@ document.add_paragraph(
 );
 
 let _path = path.join(__dirname, './monty-truth.png');
-document.add_picture(_path, width = new Inches(1.25));
+document.add_picture(_path, width = new shared.Inches(1.25));
 
 let records = [
     [3, '101', 'Spam'],

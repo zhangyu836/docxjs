@@ -117,9 +117,9 @@ class Paragraph extends Parented {
         return a;
     }
     get section() {
-        if(this.p.sectPr){
+        if(this._p.sectPr){
             let {Section} = require('../section');
-            return new Section(this.p.sectPr, this._part);
+            return new Section(this._p.sectPr, this._part);
         }
         return null;
     }
