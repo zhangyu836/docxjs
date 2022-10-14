@@ -10,7 +10,7 @@ npm i docxyz
 
 ## Usage
 
-####Write
+### Write
 ```javascript
 let {Document} = require('docxyz');
 let document = new Document();
@@ -24,7 +24,7 @@ document.add_paragraph('Intense quote', style='Intense Quote');
 document.save('demo.docx');
 ```
 
-##### Read and write
+### Read and write
 ```javascript
 let {Document} = require('docxyz');
 let fileName = './demo.docx';
