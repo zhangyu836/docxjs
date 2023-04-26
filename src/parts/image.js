@@ -2,7 +2,7 @@
 The proxy class for an image part, and related objects.
 */
 
-let sha1 = require('shasum-object')
+let sha1 = require('shasum-object');
 let {Image} = require('../image/image');
 let {Part} = require('../opc/part');
 let {Emu, Inches} = require('../shared');

@@ -12,7 +12,7 @@ let shapeEnums = require('./enum/shape');
 module.exports = {
     Document,
     shared: { Emu, Pt, Inches, Cm, Mm, Twips, Length, RGBColor },
-    text: { Font, Run, ParagraphFormat, ParagraphFormat, Paragraph },
+    text: { Font, Run, ParagraphFormat, Paragraph },
     enums: {...textEnums, ...tableEnums, ...styleEnums, ...shapeEnums},
     table,
 }

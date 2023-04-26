@@ -4,7 +4,7 @@ let path = require('path')
 let {is_string} = require('../compat');
 //let {UnrecognizedImageError} = require('./exceptions');
 let {Emu, Inches} = require('../shared');
-let sha1 = require('shasum-object')
+let sha1 = require('shasum-object');
 /*
 Provides objects that can characterize image streams as to content type and
 size, as a required step in including them in a document.*/

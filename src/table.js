@@ -464,44 +464,6 @@ class _Rows extends Parented {
         */
         return this._parent.table;
     }
-    get rows_with_cells() {
-        let rows = [];
-        let rowx = 0
-        for (let tr of this._tbl.tr_lst) {
-            let row_cells = [];
-            let colx = 0;
-            for (let tc of tr.tc_lst) {
-                for (let grid_span_idx = 0; grid_span_idx < tc.grid_span; grid_span_idx += 1) {
-                    if (tc.vMerge === ST_Merge.CONTINUE) {
-                        let master = rows[rowx-1].row_cells[colx];
-                        if (master.merged) {
-                            master = master.master;
-                        }
-                        let merged = new MergedCell(master, 'v');
-                        row_cells.push(merged);
-                    } else {
-                        if (grid_span_idx > 0) {
-                            let master = row_cells[colx-1];
-                            if (master.merged) {
-                                master = master.master;
-                            }
-                            let merged = new MergedCell(master, 'h');
-                            row_cells.push(merged);
-                        } else {
-                            let master = new _Cell(tc, this);
-                            row_cells.push(master);
-                        }
-                    }
-                    colx += 1;
-                }
-            }
-            rowx += 1;
-            let row = new _Row(tr, this);
-            row.row_cells = row_cells;
-            rows.push(row);
-        }
-        return rows;
-    }
 }
 
 module.exports = {Table, _Cell, _Column, _Columns, _Row, _Rows};
