@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head lang='en'>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width'>
+	<title>rollup-starter-app</title>
+
+	<style>
+		body {
+			font-family: 'Helvetica Neue', Arial, sans-serif;
+			color: #333;
+			font-weight: 300;
+		}
+	</style>
+</head>
+<body>
+	<h1>Hello</h1>
+	<p>Docxyz</p>
+	<div id='container'></div>
+	<script src='http://unpkg.com/docxyz'></script>
+	<script>
+		console.log(docxyz);
+		var Document = docxyz.Document;
+		console.log(Document);
+		console.log(Document());
+	</script>
+	<script src='./demo_browser.js'></script>
+</body>
+</html>

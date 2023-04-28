@@ -41,6 +41,18 @@ console.log(text);
 document.save('read_and_write.docx');
 ```
 
+### Browser
+
+```html
+<script src='http://unpkg.com/docxyz'></script>
+<script>
+    console.log(docxyz);
+    var Document = docxyz.Document;
+    console.log(Document);
+    console.log(Document());
+</script>
+```
+
 See [examples](https://github.com/zhangyu836/docxjs/tree/main/demo).
 
 ## Documentation
