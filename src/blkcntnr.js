@@ -86,6 +86,20 @@ class BlockItemContainer extends Parented {
         }
         return a;
     }
+    contentIter(){
+        let {Table} = require('./table');
+        let children = this._element.findallIter();
+        function *iter() {
+            for(let child of children) {
+                if (child.tagName == 'w:p') {
+                    yield new Paragraph(child, this);
+                } else if (child.tagName === 'w:tbl') {
+                    yield new Table(child, this);
+                }
+            }
+        }
+        return iter();
+    }
     clear_content() {
         this._element.clear_content();
         return this;

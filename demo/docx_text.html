@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head lang='en'>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width'>
+	<title>docx text</title>
+
+	<style>
+		body {
+			font-family: 'Helvetica Neue', Arial, sans-serif;
+			color: #333;
+			font-weight: 300;
+		}
+	</style>
+</head>
+<body>
+	<h1>open docx file</h1>
+	<div>
+		<input style="display: flow"
+			   type="file"
+			   accept=".docx"
+			   onChange="handleFileChange(event)"
+		/>
+	</div>
+	<div id='container'>
+		<label>docx text:</label></br>
+		<textarea id="text" style="width: 600px; height: 480px"></textarea>
+	</div>
+	<script src='https://unpkg.com/docxyz'></script>
+	<script>
+		console.log(docxyz);
+	</script>
+	<script>
+		function handleFileChange(event) {
+			const fileObj = event.target.files && event.target.files[0];
+			if (!fileObj) {
+				return;
+			}
+			const reader = new FileReader();
+			reader.readAsArrayBuffer(fileObj);
+			reader.onload = function (){
+				console.log(fileObj.name);
+				var Document = docxyz.Document;
+				var doc = new Document(this.result);
+				var textarea = document.getElementById("text");
+				textarea.textContent = doc.text;
+			}
+		};
+
+	</script>
+</body>
+</html>

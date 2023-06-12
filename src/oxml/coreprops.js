@@ -37,10 +37,13 @@ class CT_CoreProperties extends BaseOxmlElement {
         /*
         Return a new ``<cp:coreProperties>`` element
         */
+        return _coreProperties_tmpl;
+        /*
         let coreProperties, xml;
         xml = _coreProperties_tmpl;
         coreProperties = parse_xml(xml);
         return coreProperties;
+         */
     }
     get author_text() {
         /*

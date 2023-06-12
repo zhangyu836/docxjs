@@ -36,6 +36,7 @@ let webpackCommon = {
     resolve: {
         fallback: {
             fs: false,
+            events: require.resolve('events/'),
             crypto: require.resolve('crypto-browserify'),
             path: require.resolve('path-browserify'),
             //url: require.resolve('url'),

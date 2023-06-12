@@ -6,7 +6,8 @@ let {serialize_part_xml} = require('./oxml');
 let {parse_xml} = require('../oxml/xmlhandler');
 let {PackURI} = require('./packuri');
 let {Relationships} = require('./rel');
-let {getType} = require('../oxml/simpletypes')
+let {getType} = require('../oxml/simpletypes');
+let {is_string} = require('./compat');
 
 
 
@@ -166,7 +167,7 @@ class Part {
         identified by *rId*.
         */
         let rIds;
-        rIds = this._element.xpath("//@r:id");
+        rIds = this.element.xpath("//@r:id");
         //let a = [];
         let l = 0;
         for (let _rId of rIds) {
@@ -187,23 +188,30 @@ class XmlPart extends Part {
     of parsing and reserializing the XML payload and managing relationships
     to other parts.
     */
-    constructor(partname, content_type, element, _package) {
+    constructor(partname, content_type, blob_or_str, _package) {
         super(partname, content_type, null, _package);
-        this._element = element;
+        this._element = null;
+        this.blob_or_str = blob_or_str;
     }
     get blob() {
-        return serialize_part_xml(this._element);
+        return serialize_part_xml(this.element);
     }
     get element() {
         /*
         The root XML element of this XML part.
         */
+        if(this._element) return this._element;
+        let xml;
+        if(is_string(this.blob_or_str)) {
+           xml = this.blob_or_str;
+        } else {
+            xml = this.blob_or_str.toString();
+        }
+        this._element = parse_xml(xml);
         return this._element;
     }
-    static load(partname, content_type, blob, _package) {
-        let xml = blob.toString();
-        let element = parse_xml(xml);
-        return new this(partname, content_type, element, _package);
+    static load(partname, content_type, blob_or_str, _package) {
+        return new this(partname, content_type, blob_or_str, _package);
     }
     get part() {
         /*

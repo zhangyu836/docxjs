@@ -75,7 +75,7 @@ class _ContentTypesItem  {
         Return XML form of this content types item, suitable for storage as
         ``[Content_Types].xml`` in an OPC package.
         */
-        return serialize_part_xml(this._element);
+        return serialize_part_xml(this.element);
     }
     static from_parts(parts) {
         /*
@@ -105,7 +105,7 @@ class _ContentTypesItem  {
             this._overrides.set(partname, content_type);
         }
     }
-    get _element() {
+    get element() {
         /*
         Return XML form of this content types item, suitable for storage as
         ``[Content_Types].xml`` in an OPC package. Although the sequence of

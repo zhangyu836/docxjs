@@ -172,3 +172,23 @@ register_element_cls("w:hyperlink", CT_Hyperlink);
 register_element_cls("w:t", CT_Text);
 register_element_cls("default", BaseOxmlElement);
 
+let {CT_Shading, CT_TblStylePr, CT_TblStyleRowBandSize,
+    CT_TblStyleColBandSize, CT_TblLook, CT_CellMarSide,
+    CT_TblCellMar, CT_TblInd } = require('./extra');
+
+register_element_cls('w:tblBorders', CT_Borders);
+register_element_cls('w:tcBorders', CT_Borders);
+register_element_cls('w:shd', CT_Shading);
+register_element_cls("w:tblStylePr", CT_TblStylePr);
+register_element_cls("w:tblStyleRowBandSize", CT_TblStyleRowBandSize);
+register_element_cls("w:tblStyleColBandSize", CT_TblStyleColBandSize);
+register_element_cls("w:tblLook", CT_TblLook);
+register_element_cls('w:top', CT_CellMarSide);
+register_element_cls('w:bottom', CT_CellMarSide);
+register_element_cls('w:left', CT_CellMarSide);
+register_element_cls('w:right', CT_CellMarSide);
+register_element_cls('w:bdr', CT_CellMarSide);
+register_element_cls("w:tblCellMar", CT_TblCellMar);
+register_element_cls("w:tblW", CT_TblWidth);
+register_element_cls("w:tblInd", CT_TblInd);
+

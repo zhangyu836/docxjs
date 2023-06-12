@@ -9,12 +9,14 @@ let textEnums = require('./enum/text');
 let tableEnums = require('./enum/table');
 let styleEnums = require('./enum/style');
 let shapeEnums = require('./enum/shape');
+let oxml = require('./oxml/index');
 module.exports = {
     Document,
     shared: { Emu, Pt, Inches, Cm, Mm, Twips, Length, RGBColor },
     text: { Font, Run, ParagraphFormat, Paragraph },
     enums: {...textEnums, ...tableEnums, ...styleEnums, ...shapeEnums},
     table,
+    oxml
 }
 
 

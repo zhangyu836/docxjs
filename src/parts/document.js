@@ -45,7 +45,7 @@ class DocumentPart extends BaseStoryPart {
         /*
         A |Document| object providing access to the content of this document.
         */
-        return new Document(this._element, this);
+        return new Document(this.element, this);
     }
     drop_header_part(rId) {
         /* Remove related header part identified by *rId*. */
@@ -83,7 +83,7 @@ class DocumentPart extends BaseStoryPart {
         document.
         */
         if (!this._inline_shapes)
-            this._inline_shapes = new InlineShapes(this._element.body, this);
+            this._inline_shapes = new InlineShapes(this.element.body, this);
         return this._inline_shapes;
     }
     get numbering_part() {

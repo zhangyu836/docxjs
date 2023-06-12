@@ -23,7 +23,7 @@ class NumberingPart extends XmlPart {
         definitions (<w:num> element proxies) for this numbering part.
         */
         if(!this._numbering_definitions)
-            this._numbering_definitions = new _NumberingDefinitions(this._element);
+            this._numbering_definitions = new _NumberingDefinitions(this.element);
         return this._numbering_definitions;
     }
 }

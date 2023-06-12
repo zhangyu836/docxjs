@@ -28,6 +28,15 @@ class Hyperlink extends Parented {
         }
         return a;
     }
+    runIter() {
+        let runs = this._hyperlink.findallIter("w:r");
+        function *iter() {
+            for(let run of runs) {
+                yield new Run(run, this);
+            }
+        }
+        return iter();
+    }
     get target_ref(){
         let rId = this._hyperlink.rId;
         let rel = this.part.get_rel_by_rid(rId);

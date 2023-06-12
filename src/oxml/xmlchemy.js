@@ -652,9 +652,11 @@ class BaseOxmlElement  {
     }
     clear() {
         let parent = this.xmlElement;
-        let matching = this.findall(null, true);
-        for (let child of matching) {
-            parent.removeChild(child);
+        //let matching = this.findall(null, true);
+        //for (let child of matching) {
+        //    parent.removeChild(child);
+        while(parent.firstChild){
+            parent.removeChild(parent.firstChild);
         }
     }
     clone() {
@@ -699,6 +701,18 @@ class BaseOxmlElement  {
             }
         }
         return result;
+    }
+    findallIter(tagName=null) {
+        let child = this.xmlElement.firstChild;
+        function *iter() {
+            while(child) {
+                if (child.nodeType === 1 && (tagName == null || child.tagName === tagName)){
+                    yield bindElement(child);
+                }
+                child = child.nextSibling;
+            }
+        }
+        return iter();
     }
     getparent() {
         let parent = this.xmlElement.parentNode;
@@ -790,6 +804,19 @@ class BaseOxmlElement  {
             a.push(item);
         }
         return a;
+    }
+    xpathIter(xpath_str) {
+        /*
+        Override of ``lxml`` _Element.xpath() method to provide standard Open
+        XML namespace mapping (``nsmap``) in centralized location.
+        */
+        let lst = xpath.select(xpath_str, this.xmlElement);
+        function *iter() {
+            for (let item of lst){
+                yield bindElement(item);
+            }
+        }
+        return iter();
     }
     get _nsptag() {
         return new NamespacePrefixedTag(this.xmlElement.tagName);

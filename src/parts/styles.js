@@ -8,7 +8,7 @@ let {styles} = require('../templates/defaults');
 let {CT} = require('../opc/constants');
 let {PackURI} = require('../opc/packuri');
 let {XmlPart} = require('../opc/part');
-let {parse_xml} = require('../oxml/xmlhandler');
+//let {parse_xml} = require('../oxml/xmlhandler');
 let {Styles} = require('../styles/styles');
 class StylesPart extends XmlPart {
     /*
@@ -23,7 +23,8 @@ class StylesPart extends XmlPart {
         let content_type, element, partname;
         partname = new PackURI("/word/styles.xml");
         content_type = CT.WML_STYLES;
-        element = parse_xml(this._default_styles_xml());
+        //element = parse_xml(this._default_styles_xml());
+        element = this._default_styles_xml();
         return new this(partname, content_type, element, _package);
     }
     get styles() {

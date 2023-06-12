@@ -7,7 +7,7 @@ let {settings} = require('../templates/defaults');
 let {CT} = require('../opc/constants');
 let {PackURI} = require('../opc/packuri');
 let {XmlPart} = require('../opc/part');
-let {parse_xml} = require('../oxml/xmlhandler');
+//let {parse_xml} = require('../oxml/xmlhandler');
 let {Settings} = require('../settings');
 class SettingsPart extends XmlPart {
     /*
@@ -21,7 +21,8 @@ class SettingsPart extends XmlPart {
         let content_type, element, partname;
         partname = new PackURI("/word/settings.xml");
         content_type = CT.WML_SETTINGS;
-        element = parse_xml(this._default_settings_xml());
+        //element = parse_xml(this._default_settings_xml());
+        element = this._default_settings_xml();
         return new this(partname, content_type, element, _package);
     }
     get settings() {

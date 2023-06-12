@@ -190,7 +190,8 @@ class CT_Relationships extends BaseOxmlElement {
         Return XML string for this element, suitable for saving in a .rels
         stream, not pretty printed and with an XML declaration at the top.
         */
-        return serialize_part_xml(this.xmlElement);
+        return serialize_part_xml(this);
+        //return serialize_part_xml(this.xmlElement);
     }
 
 }

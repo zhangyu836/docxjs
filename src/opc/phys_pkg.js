@@ -86,6 +86,9 @@ class _ZipPkgReader {
     Implements |PhysPkgReader| interface for a zip file OPC package.
     */
     constructor(pkg_file) {
+        if(pkg_file instanceof ArrayBuffer){
+            pkg_file = Buffer.from(pkg_file);
+        }
         this._zipf = new AdmZip(pkg_file);
     }
     blob_for(pack_uri, xml=false) {

@@ -81,6 +81,19 @@ class Paragraph extends Parented {
         }
         return a;
     }
+    contentIter() {
+        let children = this._p.findallIter();
+        function *iter () {
+            for(let child of children) {
+                if (child.tagName==="w:r") {
+                    yield new Run(child, this);
+                } else if (child.tagName==="w:hyperlink") {
+                    yield new Hyperlink(child, this);
+                }
+            }
+        }
+        return iter();
+    }
     insert_paragraph_before(text = null, style = null) {
         /*
         Return a newly created paragraph, inserted directly before this

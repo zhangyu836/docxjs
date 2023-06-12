@@ -86,23 +86,24 @@ class CT_R extends BaseOxmlElement {
         child elements like ``<w:tab/>`` translated to their Python
         equivalent.
         */
-        let t_text;
-        let text = '';
-        for (let child of this.slice(0)) {
-            if (child.tagName === "w:t") {
-                t_text = child.text;
-                text += (t_text !== null) ? t_text : "";
-            } else {
-                if (child.tagName === "w:tab") {
-                    text += "\t";
-                } else {
-                    if (["w:br", "w:cr"].includes(child.tagName)) {
-                        text += "\n";
-                    }
-                }
+        let text = [];
+        for (let child of this.slice()) {
+            switch (child.tagName) {
+                case "w:t":
+                    let t_text = child.text;
+                    if(t_text)
+                        text.push(t_text);
+                    break;
+                case "w:tab":
+                    text.push("\t");
+                    break;
+                case "w:br":
+                case "w:cr":
+                    text.push("\n");
+                    break;
             }
         }
-        return text;
+        return text.join();
     }
     set text(text) {
         this.clear_content();

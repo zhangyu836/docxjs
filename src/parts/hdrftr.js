@@ -3,7 +3,7 @@ let path = require('path');
 //let fs = require('fs');
 let {header, footer} = require('../templates/defaults');
 let {CT} = require('../opc/constants');
-let {parse_xml} = require('../oxml/xmlhandler');
+//let {parse_xml} = require('../oxml/xmlhandler');
 let {BaseStoryPart} = require('./story');
 class FooterPart extends BaseStoryPart {
     /* Definition of a section footer. */
@@ -14,7 +14,8 @@ class FooterPart extends BaseStoryPart {
             (n)=>{return `/word/footer${n}.xml`}
             );
         content_type = CT.WML_FOOTER;
-        element = parse_xml(this._default_footer_xml());
+        //element = parse_xml(this._default_footer_xml());
+        element = this._default_footer_xml();
         return new this(partname, content_type, element, _package);
     }
     static _default_footer_xml() {
@@ -34,7 +35,8 @@ class HeaderPart extends BaseStoryPart {
             (n)=>{return `/word/header${n}.xml`}
             );
         content_type = CT.WML_HEADER;
-        element = parse_xml(this._default_header_xml());
+        //element = parse_xml(this._default_header_xml());
+        element = this._default_header_xml();
         return new this(partname, content_type, element, _package);
     }
     static _default_header_xml() {

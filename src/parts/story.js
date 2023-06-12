@@ -65,7 +65,7 @@ class BaseStoryPart extends XmlPart {
         document, without regard to the element type it appears on.
         */
         let id_str_lst, used_ids;
-        id_str_lst = this._element.xpath("//@id");
+        id_str_lst = this.element.xpath("//@id");
         used_ids = [];
         for (let id_str of id_str_lst) {
             let n = parseInt(id_str.value);
