@@ -25,6 +25,13 @@ class CT_Fonts extends BaseOxmlElement {
     */
     ascii = new OptionalAttribute('w:ascii', ST_String);
     hAnsi = new OptionalAttribute('w:hAnsi', ST_String);
+    eastAsia = new OptionalAttribute('w:eastAsia', ST_String);
+    cs = new OptionalAttribute('w:cs', ST_String);
+    asciiTheme = new OptionalAttribute('w:asciiTheme', ST_String);
+    hAnsiTheme = new OptionalAttribute('w:hAnsiTheme', ST_String);
+    eastAsiaTheme = new OptionalAttribute('w:eastAsiaTheme', ST_String);
+    csTheme = new OptionalAttribute('w:csTheme', ST_String);
+    hint = new OptionalAttribute('w:hint', ST_String);
 }
 
 class CT_Highlight extends BaseOxmlElement {
@@ -32,6 +39,9 @@ class CT_Highlight extends BaseOxmlElement {
     `w:highlight` element, specifying font highlighting/background color.
     */
     val = new RequiredAttribute('w:val', WD_COLOR);
+    get color() {
+        return WD_COLOR.to_xml(this.val);
+    }
 }
 
 class CT_HpsMeasure extends BaseOxmlElement {
@@ -81,6 +91,7 @@ class CT_RPr extends BaseOxmlElement {
     vertAlign = new ZeroOrOne('w:vertAlign', _tag_seq.slice(32));
     rtl = new ZeroOrOne('w:rtl', _tag_seq.slice(33));
     cs = new ZeroOrOne('w:cs', _tag_seq.slice(34));
+    lang = new ZeroOrOne('w:lang', _tag_seq.slice(36));
     specVanish = new ZeroOrOne('w:specVanish', _tag_seq.slice(38));
     oMath = new ZeroOrOne('w:oMath', _tag_seq.slice(39));
     //delete _tag_seq

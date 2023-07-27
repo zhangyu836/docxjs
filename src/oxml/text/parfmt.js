@@ -5,7 +5,7 @@ let {WD_ALIGN_PARAGRAPH, WD_LINE_SPACING,
     WD_TAB_ALIGNMENT, WD_TAB_LEADER} = require('../../enum/text');
 let {Length} = require('../../shared');
 let {ST_SignedTwipsMeasure, ST_TwipsMeasure, ST_String,
-    ST_HpsMeasure, ST_HexColor} = require('../simpletypes');
+    XsdInt, ST_HexColor} = require('../simpletypes');
 let {BaseOxmlElement, OneOrMore, OptionalAttribute,
     RequiredAttribute, ZeroOrOne} = require('../xmlchemy');
 
@@ -36,8 +36,10 @@ class CT_Borders extends BaseOxmlElement {
 }
 class CT_Border extends BaseOxmlElement {
     val = new OptionalAttribute('w:val', ST_String);
-    sz = new OptionalAttribute('w:sz', ST_HpsMeasure);
-    space = new OptionalAttribute("w:space", ST_String);
+    //sz = new OptionalAttribute('w:sz', ST_HpsMeasure);
+    //space = new OptionalAttribute("w:space", ST_String);
+    sz = new OptionalAttribute('w:sz', XsdInt); // in 1/8 of a point
+    space = new OptionalAttribute("w:space", XsdInt);
     color = new OptionalAttribute('w:color', ST_HexColor);
     //themeColor = new OptionalAttribute('w:themeColor', MSO_THEME_COLOR);
 }

@@ -30,9 +30,10 @@ class Hyperlink extends Parented {
     }
     runIter() {
         let runs = this._hyperlink.findallIter("w:r");
+        let parent = this;
         function *iter() {
             for(let run of runs) {
-                yield new Run(run, this);
+                yield new Run(run, parent);
             }
         }
         return iter();

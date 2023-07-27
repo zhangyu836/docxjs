@@ -33,10 +33,8 @@ class CT_Shading extends BaseOxmlElement {
     fill = new RequiredAttribute('w:fill', ST_HexColor);
 }
 class CT_CellMarSide extends CT_Border {
-    w = new OptionalAttribute('w:w', ST_TwipsMeasure);
+    w = new OptionalAttribute('w:w', ST_TwipsMeasure); // in 1/12 of a point
     type = new OptionalAttribute('w:type', ST_String);
-    sz = new OptionalAttribute('w:sz', ST_TwipsMeasure);
-    space = new OptionalAttribute("w:space", XsdInt);
 }
 class CT_TblCellMar extends CT_Borders {
 }

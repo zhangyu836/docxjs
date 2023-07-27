@@ -89,12 +89,13 @@ class BlockItemContainer extends Parented {
     contentIter(){
         let {Table} = require('./table');
         let children = this._element.findallIter();
+        let parent = this;
         function *iter() {
             for(let child of children) {
                 if (child.tagName == 'w:p') {
-                    yield new Paragraph(child, this);
+                    yield new Paragraph(child, parent);
                 } else if (child.tagName === 'w:tbl') {
-                    yield new Table(child, this);
+                    yield new Table(child, parent);
                 }
             }
         }

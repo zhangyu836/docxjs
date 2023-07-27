@@ -52,8 +52,9 @@ class OpcPackage  {
                         }
                         visited.push(part);
                         new_source = part;
-                        for (let rel of walk_rels(new_source, visited))
-                            yield rel;
+                        //for (let rel of walk_rels(new_source, visited))
+                        //    yield rel;
+                        yield* walk_rels(new_source, visited);
                     }
                 }
             }
@@ -61,8 +62,9 @@ class OpcPackage  {
         let _this = this;
         return {
             [Symbol.iterator]: function* iter() {
-                for (let rel of walk_rels(_this))
-                    yield rel
+                //for (let rel of walk_rels(_this))
+                //    yield rel
+                yield* walk_rels(_this);
             }
         }
     }
@@ -85,8 +87,9 @@ class OpcPackage  {
                         visited.push(part);
                         yield part;
                         let new_source = part;
-                        for (let part of walk_parts(new_source, visited))
-                            yield part;
+                        //for (let part of walk_parts(new_source, visited))
+                        //    yield part;
+                        yield* walk_parts(new_source, visited);
                     }
                 }
             }
@@ -94,8 +97,9 @@ class OpcPackage  {
         let _this = this;
         return {
             [Symbol.iterator]: function* iter() {
-                for (let part of walk_parts(_this))
-                    yield part;
+                //for (let part of walk_parts(_this))
+                //    yield part;
+                yield* walk_parts(_this);
             }
         }
     }

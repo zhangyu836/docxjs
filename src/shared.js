@@ -15,6 +15,7 @@ class Length extends Number{
     static _EMUS_PER_CM = 360000.00;
     static _EMUS_PER_MM = 36000.00;
     static _EMUS_PER_PT = 12700.00;
+    static _EMUS_PER_PX = 9525.00;
     static _EMUS_PER_TWIP = 635.00;
 
     constructor (emu) {
@@ -49,6 +50,12 @@ class Length extends Number{
         Floating point length in points
         */
         return this / Length._EMUS_PER_PT;
+    }
+    get px() {
+        /*
+        Floating point length in pixels
+        */
+        return this / Length._EMUS_PER_PX;
     }
     get twips() {
         /*
@@ -104,6 +111,15 @@ class Pt extends Length {
     */
     constructor(points) {
         let emu = points * Length._EMUS_PER_PT;
+        super(emu);
+    }
+}
+class Px extends Length {
+    /*
+    Convenience value class for specifying a length in pixels
+    */
+    constructor(pixels) {
+        let emu = pixels * Length._EMUS_PER_PX;
         super(emu);
     }
 }

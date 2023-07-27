@@ -2,7 +2,7 @@
 Provides StylesPart and related objects
 */
 
-let path = require('path');
+//let path = require('path');
 //let fs = require('fs');
 let {styles} = require('../templates/defaults');
 let {CT} = require('../opc/constants');

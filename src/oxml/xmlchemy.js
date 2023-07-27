@@ -220,6 +220,15 @@ class _BaseChildElement  {
         let index_prop_name = `${this._prop_name}_lst_index`;
         this._element_cls[index_prop_name] = this._list_index;
     }
+    _add_iter_getter() {
+        /*
+        Add a read-only ``{prop_name}_iter`` property to the element class to
+        retrieve a iterator of child elements matching this type.
+        */
+        let prop_name = `${this._prop_name}_iter`;
+        Object.defineProperty(this._element_cls, prop_name, {
+            get: this._iter_getter})
+    }
     get _add_method_name() {
         return `_add_${this._prop_name}`;
     }
@@ -282,6 +291,17 @@ class _BaseChildElement  {
             return this.findall(_this._nsptagname);
         }
         return get_child_element_list;
+    }
+    get _iter_getter() {
+        /*
+        Return a function object suitable for the "get" side of a list
+        property descriptor.
+        */
+        let _this = this;
+        function get_child_element_iter() {
+            return this.findallIter(_this._nsptagname);
+        }
+        return get_child_element_iter;
     }
     get _list_index() {
         /*
@@ -415,6 +435,7 @@ class OneOrMore extends _BaseChildElement {
         */
         super.populate_class_members(element_cls, prop_name);
         this._add_list_getter();
+        this._add_iter_getter();
         this._add_creator();
         this._add_inserter();
         this._add_adder();
@@ -432,6 +453,7 @@ class ZeroOrMore extends _BaseChildElement {
         */
         super.populate_class_members(element_cls, prop_name);
         this._add_list_getter();
+        this._add_iter_getter();
         this._add_creator();
         this._add_inserter();
         this._add_adder();

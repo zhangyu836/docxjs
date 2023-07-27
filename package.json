@@ -1,6 +1,6 @@
 {
   "name": "docxyz",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Javascript port of python-docx.",
   "main": "src/index.js",
   "browser": "dist/docxyz_swc.iife.min.js",

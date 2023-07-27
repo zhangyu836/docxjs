@@ -152,6 +152,12 @@ class Document extends ElementProxy {
         */
         return this._part.styles;
     }
+    get theme() {
+        /*
+        A |Theme| object providing access to the theme in this document.
+        */
+        return this._part.theme;
+    }
     get tables() {
         /*
         A list of |Table| instances corresponding to the tables in the

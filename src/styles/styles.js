@@ -52,7 +52,7 @@ class Styles extends ElementProxy {
         throw new KeyError(`no style with name '${key}'`);
     }
     *iter() {
-        for(let style of this._element.style_lst){
+        for(let style of this._element.style_iter){
             yield StyleFactory(style);
         }
     }

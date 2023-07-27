@@ -118,8 +118,9 @@ class PackageReader  {
                     let next_walker = PackageReader._walk_phys_parts(
                         phys_reader, part_srels, visited_partnames
                     )
-                    for (let [partname, blob, reltype, srels] of next_walker)
-                        yield [partname, blob, reltype, srels];
+                    //for (let [partname, blob, reltype, srels] of next_walker)
+                    //    yield [partname, blob, reltype, srels];
+                    yield* next_walker;
                 }
             },
         };

@@ -192,3 +192,16 @@ register_element_cls("w:tblCellMar", CT_TblCellMar);
 register_element_cls("w:tblW", CT_TblWidth);
 register_element_cls("w:tblInd", CT_TblInd);
 
+let {CT_Theme, CT_ThemeElements, CT_FontScheme,
+    CT_MajorMinorFont, CT_Font} = require('./theme');
+
+register_element_cls("a:theme", CT_Theme);
+register_element_cls("a:themeElements", CT_ThemeElements);
+register_element_cls("a:fontScheme", CT_FontScheme);
+register_element_cls("a:majorFont", CT_MajorMinorFont);
+register_element_cls("a:minorFont", CT_MajorMinorFont);
+register_element_cls("a:latin", CT_Font);
+register_element_cls("a:ea", CT_Font);
+register_element_cls("a:cs", CT_Font);
+register_element_cls("a:font", CT_Font);
+

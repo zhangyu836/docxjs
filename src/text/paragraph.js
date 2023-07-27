@@ -83,12 +83,13 @@ class Paragraph extends Parented {
     }
     contentIter() {
         let children = this._p.findallIter();
+        let parent = this;
         function *iter () {
             for(let child of children) {
                 if (child.tagName==="w:r") {
-                    yield new Run(child, this);
+                    yield new Run(child, parent);
                 } else if (child.tagName==="w:hyperlink") {
-                    yield new Hyperlink(child, this);
+                    yield new Hyperlink(child, parent);
                 }
             }
         }

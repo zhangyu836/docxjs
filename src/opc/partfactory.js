@@ -7,6 +7,7 @@ let {ImagePart} = require('../parts/image');
 let {NumberingPart} = require('../parts/numbering');
 let {SettingsPart} = require('../parts/settings');
 let {StylesPart} = require('../parts/styles');
+let {ThemePart} = require('../parts/theme');
 let {Part} = require('./part');
 
 
@@ -26,6 +27,7 @@ part_type_for[CT.WML_HEADER] = HeaderPart;
 part_type_for[CT.WML_NUMBERING] = NumberingPart;
 part_type_for[CT.WML_SETTINGS] = SettingsPart;
 part_type_for[CT.WML_STYLES] = StylesPart;
+part_type_for[CT.OFC_THEME] = ThemePart;
 
 let default_part_type = Part;
 function _part_cls_for(content_type)  {

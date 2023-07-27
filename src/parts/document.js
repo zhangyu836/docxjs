@@ -5,6 +5,7 @@ let {RT} = require('../opc/constants');
 let {FooterPart, HeaderPart} = require('./hdrftr');
 let {NumberingPart} = require('./numbering');
 let {SettingsPart} = require('./settings');
+let {ThemePart} = require('./theme');
 let {BaseStoryPart} = require('./story');
 let {StylesPart} = require('./styles');
 let {InlineShapes} = require('../shape');
@@ -128,6 +129,13 @@ class DocumentPart extends BaseStoryPart {
         */
         return this._styles_part.styles;
     }
+    get theme() {
+        /*
+        A |Theme| object providing access to the theme in the theme part
+        of this document.
+        */
+        return this._theme_part.theme;
+    }
     get _settings_part() {
         /*
         A |SettingsPart| object providing access to the document-level
@@ -164,6 +172,28 @@ class DocumentPart extends BaseStoryPart {
                 throw e;
             }
         }
+    }
+    get _theme_part() {
+        /*
+        Instance of |ThemePart| for this document. Creates an empty theme
+        part if one is not present.
+        */
+        return this.get_part(ThemePart, RT.THEME);
+    }
+    get_part(part_cls, rt ) {
+        let part;
+        try {
+            return this.part_related_by(rt);
+        } catch(e) {
+            if (e instanceof KeyError) {
+                part = part_cls._default(this._package);
+                this.relate_to(part, rt);
+                return part;
+            } else {
+                throw e;
+            }
+        }
+
     }
 }
 
